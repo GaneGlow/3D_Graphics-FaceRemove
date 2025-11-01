@@ -27,12 +27,10 @@ public class ObjWriter {
 
         StringBuilder content = new StringBuilder();
 
-        // Write vertices
         for (Vector3f vertex : model.vertices) {
             content.append(String.format("v %.6f %.6f %.6f\n", vertex.x, vertex.y, vertex.z));
         }
 
-        // Write texture vertices if they exist
         if (!model.textureVertices.isEmpty()) {
             content.append("\n");
             for (Vector2f texVertex : model.textureVertices) {
@@ -40,7 +38,6 @@ public class ObjWriter {
             }
         }
 
-        // Write normals if they exist
         if (!model.normals.isEmpty()) {
             content.append("\n");
             for (Vector3f normal : model.normals) {
@@ -48,7 +45,6 @@ public class ObjWriter {
             }
         }
 
-        // Write polygons
         content.append("\n");
         for (Polygon polygon : model.polygons) {
             content.append("f ");
@@ -83,11 +79,9 @@ public class ObjWriter {
             content.append("\n");
         }
 
-        // Write to file
         Files.writeString(Path.of(filePath), content.toString());
     }
 
-    // Overloaded method for convenience
     public static void write(Path filePath, Model model) throws IOException {
         write(filePath.toString(), model);
     }
